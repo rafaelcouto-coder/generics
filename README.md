@@ -1,5 +1,4 @@
-Genéricos permitem que o código C# seja mais seguro, reutilizável e de alto desempenho.
-
+Nesta aplicação foram implementados os seguintes tópicos, afim de aprendizado:
 * Classes genéricas
 * Interfaces genéricas
 * Métodos genéricos
