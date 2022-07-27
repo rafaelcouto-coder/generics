@@ -1,33 +1,30 @@
-﻿using WiredBrainCoffee.StorageApp.Entities;
+﻿using WiredBrainCoffee.StorageApp.Data;
+using WiredBrainCoffee.StorageApp.Entities;
 using WiredBrainCoffee.StorageApp.Repository;
 
-var employeeRepository = new GenericRepository<Employee>();
-
+var employeeRepository = new SqlRepository<Employee>(new StorageAppDbContext());
 AddEmployees(employeeRepository);
-employeeRepository.Save();
-GetEmployeeById(employeeRepository);
+GetEmployeeById(employeeRepository, 3);
 
-var organizationRepository = new GenericRepository<Organization>();
-
+var organizationRepository = new ListRepository<Organization>();
 AddOrganizations(organizationRepository);
-employeeRepository.Save();
 
 Console.ReadLine();
 
-void GetEmployeeById(GenericRepository<Employee> employeeRepository)
+void GetEmployeeById(IRepository<Employee> employeeRepository, int Id)
 {
-    var employee = employeeRepository.GetById(2);
-    Console.WriteLine($"Employee with id 2: {employee.FirstName}");
+    var employee = employeeRepository.GetById(Id);
+    Console.WriteLine($"Employee with id {Id}: {employee.FirstName}");
 }
 
-static void AddEmployees(GenericRepository<Employee> employeeRepository)
+static void AddEmployees(IRepository<Employee> employeeRepository)
 {
     employeeRepository.Add(new Employee { FirstName = "Bianca" });
     employeeRepository.Add(new Employee { FirstName = "Anna" });
     employeeRepository.Add(new Employee { FirstName = "Ruth" });
 }
 
-static void AddOrganizations(GenericRepository<Organization> organizationRepository)
+static void AddOrganizations(IRepository<Organization> organizationRepository)
 {
     organizationRepository.Add(new Organization { Name = "Pluralsight" });
     organizationRepository.Add(new Organization { Name = "Alura" });

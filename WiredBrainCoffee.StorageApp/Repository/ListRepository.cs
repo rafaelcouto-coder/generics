@@ -2,13 +2,12 @@
 
 namespace WiredBrainCoffee.StorageApp.Repository
 {
-    public class GenericRepository<T> where T : class, IEntity, new()
+    public class ListRepository<T> : IRepository<T> where T : IEntity
     {
         private readonly List<T> _items = new List<T>();
-
-        public T CreateItem()
+        public IEnumerable<T> GetAll()
         {
-            return new T();
+            throw new NotImplementedException();
         }
 
         public T GetById(int id)
@@ -33,7 +32,7 @@ namespace WiredBrainCoffee.StorageApp.Repository
             }
         }
 
-        public void Save(T item)
+        public void Remove(T item)
         {
             _items.Remove(item);
         }
